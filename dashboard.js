@@ -2,7 +2,7 @@
 async function fetchData() {
     // IMPORTANT: Replace 'YOUR_CLOUD_FUNCTION_URL' with the actual HTTP trigger URL
     // you get after deploying your Google Cloud Function.
-    const backendUrl = 'YOUR_CLOUD_FUNCTION_URL'; // e.g., https://us-central1-market-dashboard-464422.cloudfunctions.net/fetch_market_data
+    const backendUrl = 'https://us-central1-market-dashboard-464422.cloudfunctions.net/fetch_market_data'; // e.g., https://us-central1-market-dashboard-464422.cloudfunctions.net/fetch_market_data
 
     try {
         const response = await fetch(backendUrl);
