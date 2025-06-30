@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Meldrum Market Outlook Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .metric-value {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 600; /* font-semibold */
+            color: #1a202c; /* neutral-800 */
+        }
+        .metric-change {
+            font-size: 1rem; /* text-base */
+            font-weight: 500; /* font-medium */
+        }
+        .positive {
+            color: #10b981; /* emerald-500 */
+        }
+        .negative {
+            color: #ef4444; /* red-500 */
+        }
+        .neutral {
+            color: #6b7280; /* gray-500 */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 sm:p-6 md:p-8">
+    <header class="w-full max-w-7xl mb-8 text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">Mark Meldrum Market Outlook</h1>
+        <p class="text-lg sm:text-xl text-gray-600">Key Financial Metrics Dashboard</p>
+        <p id="last-updated" class="text-sm text-gray-500 mt-2"></p>
+    </header>
+
+    <main class="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Equities Section -->
+        <section class="lg:col-span-3">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 ml-2">Equities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- S&P 500 Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">S&P 500 (SPX)</h3>
+                    <p class="metric-value" id="spx-value">--</p>
+                    <p class="metric-change" id="spx-change">--</p>
+                </div>
+                <!-- NASDAQ Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">NASDAQ Composite (IXIC)</h3>
+                    <p class="metric-value" id="ixic-value">--</p>
+                    <p class="metric-change" id="ixic-change">--</p>
+                </div>
+                <!-- Dow Jones Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">Dow Jones Industrial Avg (DJIA)</h3>
+                    <p class="metric-value" id="djia-value">--</p>
+                    <p class="metric-change" id="djia-change">--</p>
+                </div>
+                <!-- Equity P/E Ratio Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">S&P 500 P/E Ratio</h3>
+                    <p class="metric-value" id="spx-pe-value">--</p>
+                    <p class="metric-change" id="spx-pe-change">--</p>
+                </div>
+                <!-- Equity Earnings Yield Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">S&P 500 Earnings Yield</h3>
+                    <p class="metric-value" id="spx-ey-value">--</p>
+                    <p class="metric-change" id="spx-ey-change">--</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fixed Income Section -->
+        <section class="lg:col-span-3 mt-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 ml-2">Fixed Income</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- US 10-Year Treasury Yield Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">US 10-Year Treasury Yield</h3>
+                    <p class="metric-value" id="us10y-value">--</p>
+                    <p class="metric-change" id="us10y-change">--</p>
+                </div>
+                <!-- US 2-Year Treasury Yield Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">US 2-Year Treasury Yield</h3>
+                    <p class="metric-value" id="us2y-value">--</p>
+                    <p class="metric-change" id="us2y-change">--</p>
+                </div>
+                <!-- Corporate Bond Spread Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">Corporate Bond Spread (IG)</h3>
+                    <p class="metric-value" id="corp-spread-value">--</p>
+                    <p class="metric-change" id="corp-spread-change">--</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commodities Section -->
+        <section class="lg:col-span-3 mt-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 ml-2">Commodities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- WTI Crude Oil Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">WTI Crude Oil ($/barrel)</h3>
+                    <p class="metric-value" id="wti-value">--</p>
+                    <p class="metric-change" id="wti-change">--</p>
+                </div>
+                <!-- Gold Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">Gold ($/ounce)</h3>
+                    <p class="metric-value" id="gold-value">--</p>
+                    <p class="metric-change" id="gold-change">--</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Macro & Currencies Section -->
+        <section class="lg:col-span-3 mt-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 ml-2">Macro & Currencies</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Inflation (CPI) Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">US CPI (YoY)</h3>
+                    <p class="metric-value" id="cpi-value">--</p>
+                    <p class="metric-change" id="cpi-change">--</p>
+                </div>
+                <!-- Unemployment Rate Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">US Unemployment Rate</h3>
+                    <p class="metric-value" id="unemp-value">--</p>
+                    <p class="metric-change" id="unemp-change">--</p>
+                </div>
+                <!-- Federal Funds Rate Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">US Fed Funds Rate</h3>
+                    <p class="metric-value" id="ffr-value">--</p>
+                    <p class="metric-change" id="ffr-change">--</p>
+                </div>
+                <!-- US Dollar Index (DXY) Card -->
+                <div class="card">
+                    <h3 class="text-lg font-medium text-gray-700">US Dollar Index (DXY)</h3>
+                    <p class="metric-value" id="dxy-value">--</p>
+                    <p class="metric-change" id="dxy-change">--</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full max-w-7xl text-center mt-8 p-4 text-gray-500 text-sm">
+        <p>&copy; 2025 Mark Meldrum Market Outlook Dashboard. Data for illustrative purposes.</p>
+    </footer>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
